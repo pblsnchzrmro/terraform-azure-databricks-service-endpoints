@@ -121,21 +121,21 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_allowed_ips"></a> [allowed\_ips](#input\_allowed\_ips) | List of IP addresses allowed to bypass the storage account firewall | `list(string)` | `[]` | no |
-| <a name="input_azure_region"></a> [azure\_region](#input\_azure\_region) | Azure region where resources will be deployed | `string` | n/a | yes |
-| <a name="input_azure_subscription_id"></a> [azure\_subscription\_id](#input\_azure\_subscription\_id) | Azure subscription ID | `string` | n/a | yes |
-| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | VPC CIDR block range | `string` | `"10.20.0.0/23"` | no |
-| <a name="input_databricks_account_host"></a> [databricks\_account\_host](#input\_databricks\_account\_host) | Databricks Account URL | `string` | n/a | yes |
-| <a name="input_databricks_account_id"></a> [databricks\_account\_id](#input\_databricks\_account\_id) | Your Databricks Account ID | `string` | n/a | yes |
-| <a name="input_databricks_metastore"></a> [databricks\_metastore](#input\_databricks\_metastore) | Databricks UC Metastore | `string` | n/a | yes |
-| <a name="input_dbfs_storage_account"></a> [dbfs\_storage\_account](#input\_dbfs\_storage\_account) | Name of the storage account for DBFS | `string` | n/a | yes |
-| <a name="input_default_storage_firewall_enabled"></a> [default\_storage\_firewall\_enabled](#input\_default\_storage\_firewall\_enabled) | Disallow public access to default storage account | `bool` | `true` | no |
-| <a name="input_network_security_group_rules_required"></a> [network\_security\_group\_rules\_required](#input\_network\_security\_group\_rules\_required) | n/a | `string` | `"AllRules"` | no |
-| <a name="input_private_subnets_cidr"></a> [private\_subnets\_cidr](#input\_private\_subnets\_cidr) | CIDR block for the private subnet | `string` | `"10.20.0.0/25"` | no |
-| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Project name used for resource naming | `string` | n/a | yes |
-| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Allow public access to frontend workspace web UI | `bool` | `true` | no |
-| <a name="input_public_subnets_cidr"></a> [public\_subnets\_cidr](#input\_public\_subnets\_cidr) | CIDR block for the public subnet | `string` | `"10.20.0.128/25"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to all resources | `map(string)` | `{}` | no |
+| <a name="input_allowed_ips"></a> [allowed\_ips](#input\_allowed\_ips) | IP addresses permitted to access storage through firewall exceptions | `list(string)` | `[]` | no |
+| <a name="input_azure_region"></a> [azure\_region](#input\_azure\_region) | The Azure location for deploying infrastructure resources | `string` | n/a | yes |
+| <a name="input_azure_subscription_id"></a> [azure\_subscription\_id](#input\_azure\_subscription\_id) | Target Azure subscription identifier | `string` | n/a | yes |
+| <a name="input_cidr_block"></a> [cidr\_block](#input\_cidr\_block) | IP address range for the virtual network | `string` | `"10.0.0.0/24"` | no |
+| <a name="input_databricks_account_host"></a> [databricks\_account\_host](#input\_databricks\_account\_host) | The account console endpoint for Databricks | `string` | n/a | yes |
+| <a name="input_databricks_account_id"></a> [databricks\_account\_id](#input\_databricks\_account\_id) | Unique identifier for the Databricks account | `string` | n/a | yes |
+| <a name="input_databricks_metastore"></a> [databricks\_metastore](#input\_databricks\_metastore) | Unity Catalog metastore identifier for Databricks | `string` | n/a | yes |
+| <a name="input_dbfs_storage_account"></a> [dbfs\_storage\_account](#input\_dbfs\_storage\_account) | Storage account identifier for Databricks File System | `string` | n/a | yes |
+| <a name="input_default_storage_firewall_enabled"></a> [default\_storage\_firewall\_enabled](#input\_default\_storage\_firewall\_enabled) | Enable firewall restrictions on the primary storage account | `bool` | `true` | no |
+| <a name="input_network_security_group_rules_required"></a> [network\_security\_group\_rules\_required](#input\_network\_security\_group\_rules\_required) | Defines the scope of network security group rules to apply | `string` | `"AllRules"` | no |
+| <a name="input_private_subnets_cidr"></a> [private\_subnets\_cidr](#input\_private\_subnets\_cidr) | IP address space allocated to the private subnet | `string` | `"10.0.0.0/25"` | no |
+| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | Identifier prefix applied to resource names | `string` | n/a | yes |
+| <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | Controls whether the workspace UI is accessible from the internet | `bool` | `true` | no |
+| <a name="input_public_subnets_cidr"></a> [public\_subnets\_cidr](#input\_public\_subnets\_cidr) | IP address space allocated to the public subnet | `string` | `"10.0.0.128/25"` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Key-value pairs for labeling deployed resources | `map(string)` | `{}` | no |
 
 ## Outputs
 
