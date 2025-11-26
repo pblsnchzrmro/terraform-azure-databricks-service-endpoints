@@ -1,81 +1,82 @@
 variable "azure_region" {
   type        = string
-  description = "Azure region where resources will be deployed"
+  description = "The Azure location for deploying infrastructure resources"
 }
 
 variable "project_name" {
   type        = string
-  description = "Project name used for resource naming"
+  description = "Identifier prefix applied to resource names"
 }
 
 variable "dbfs_storage_account" {
   type        = string
-  description = "Name of the storage account for DBFS"
+  description = "Storage account identifier for Databricks File System"
 }
 
 variable "azure_subscription_id" {
   type        = string
-  description = "Azure subscription ID"
+  description = "Target Azure subscription identifier"
 }
 
 variable "cidr_block" {
-  description = "VPC CIDR block range"
   type        = string
-  default     = "10.20.0.0/23"
+  description = "IP address range for the virtual network"
+  default     = "10.0.0.0/24"
 }
 
 variable "private_subnets_cidr" {
-  description = "CIDR block for the private subnet"
   type        = string
-  default     = "10.20.0.0/25"
+  description = "IP address space allocated to the private subnet"
+  default     = "10.0.0.0/25"
 }
 
 variable "public_subnets_cidr" {
-  description = "CIDR block for the public subnet"
   type        = string
-  default     = "10.20.0.128/25"
+  description = "IP address space allocated to the public subnet"
+  default     = "10.0.0.128/25"
 }
 
 variable "allowed_ips" {
   type        = list(string)
-  description = "List of IP addresses allowed to bypass the storage account firewall"
+  description = "IP addresses permitted to access storage through firewall exceptions"
   default     = []
 }
 
 variable "network_security_group_rules_required" {
-  type    = string
-  default = "AllRules"
+  type        = string
+  description = "Defines the scope of network security group rules to apply"
+  default     = "AllRules"
 }
 
 variable "default_storage_firewall_enabled" {
-  description = "Disallow public access to default storage account"
   type        = bool
+  description = "Enable firewall restrictions on the primary storage account"
   default     = true
 }
 
 variable "public_network_access_enabled" {
-  description = "Allow public access to frontend workspace web UI"
   type        = bool
+  description = "Controls whether the workspace UI is accessible from the internet"
   default     = true
 }
 
 variable "databricks_account_host" {
-  description = "Databricks Account URL"
   type        = string
+  description = "The account console endpoint for Databricks"
 }
 
 variable "databricks_account_id" {
-  description = "Your Databricks Account ID"
   type        = string
+  description = "Unique identifier for the Databricks account"
 }
 
 variable "databricks_metastore" {
-  description = "Databricks UC Metastore"
   type        = string
+  description = "Unity Catalog metastore identifier for Databricks"
 }
 
 variable "tags" {
   type        = map(string)
-  description = "Tags to apply to all resources"
+  description = "Key-value pairs for labeling deployed resources"
   default     = {}
 }
