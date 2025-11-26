@@ -1,13 +1,14 @@
-formatter: "markdown table" # this is required
+formatter: "" # this is required
 
 version: ""
 
-header-from: "main.tf"
+header-from: main.tf
 footer-from: ""
 
 recursive:
   enabled: false
   path: modules
+  include-main: true
 
 sections:
   hide: []
@@ -15,15 +16,13 @@ sections:
 
 content: ""
 
-# see: https://terraform-docs.io/user-guide/configuration/output
 output:
-  file: README.md
+  file: ""
   mode: inject
   template: |-
     <!-- BEGIN_TF_DOCS -->
     {{ .Content }}
     <!-- END_TF_DOCS -->
-
 
 output-values:
   enabled: false
@@ -47,4 +46,4 @@ settings:
   required: true
   sensitive: true
   type: true
-  add-newline: true
+  
