@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code repo
-      uses: actions/checkout@v3
+      uses: actions/checkout@v5
 
     - name: Security KICS scanner
       uses: checkmarx/kics-github-action@v2.1.15
