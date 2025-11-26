@@ -1,0 +1,77 @@
+name: Pre-Commit
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  collect-directories:
+    name: Collect Terraform directories
+    runs-on: ubuntu-latest
+    outputs:
+      directories: ${{ steps.dirs.outputs.directories }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      
+      - name: List repo tree
+        run: |
+          echo "Listing working directory:"
+          pwd
+          ls -R .
+
+      - name: Detect Terraform directories
+        id: dirs
+        uses: clowdhaus/terraform-composite-actions/directories@v1.14.0
+
+  precommit-min-version:
+    name: Validate with minimum supported version
+    needs: collect-directories
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: ${{ fromJson(needs.collect-directories.outputs.directories) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Detect Terraform version bounds
+        id: minmax
+        uses: clowdhaus/terraform-min-max@v2.1.0
+        with:
+          directory: ${{ matrix.directory }}
+
+      - name: Run pre-commit (min version)
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.14.0
+        with:
+          terraform-version: ${{ steps.minmax.outputs.minVersion }}
+          args: 'terraform_validate --color=always --show-diff-on-failure --files ${{ matrix.directory }}/*'
+
+  precommit-max-version:
+    name: Validate with maximum supported version
+    needs: collect-directories
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        directory: ${{ fromJson(needs.collect-directories.outputs.directories) }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Detect Terraform version bounds
+        id: minmax
+        uses: clowdhaus/terraform-min-max@v2.1.0
+        with:
+          directory: ${{ matrix.directory }}
+
+      - name: Run pre-commit (max version)
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.14.0
+        with:
+          terraform-version: ${{ steps.minmax.outputs.maxVersion }}
+          args: 'terraform_validate --color=always --show-diff-on-failure --files ${{ matrix.directory }}/*'
